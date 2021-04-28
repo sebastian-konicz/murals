@@ -40,7 +40,7 @@ def main():
         # marker setting
         encoded = base64.b64encode(open(photo_path, 'rb').read())
         html = '<img style="width:100%; height:100%;" src="data:image/png;base64,{}">'.format
-        iframe = IFrame(html(encoded.decode('UTF-8')), width=350, height=350)
+        iframe = IFrame(html(encoded.decode('UTF-8')), width=200, height=200)
         popup = folium.Popup(iframe, max_width=800)
 
         folium.Marker(location=[lat, lng],
