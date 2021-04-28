@@ -4,7 +4,7 @@ import base64
 from folium import IFrame
 import folium
 import time
-from IPython.display import display
+# from IPython.display import display
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -32,9 +32,6 @@ def main():
     map_graph = folium.Map([52.145259, 21.051619], zoom_start=13)
 
     # encoded = base64.b64encode(open('mypict.jpg', 'rb').read())
-
-
-
 
     # Plot Markers
     for lat, lng, name, photo in zip(lat, lng, name, photo):
@@ -88,12 +85,12 @@ def main():
     # saving map
     print('saving map')
     map_graph.save(project_dir + r'\data\final\mural_map.html')
-    display(map_graph)
+    map_graph.save(project_dir + r'\templates\mural_map.html')
+
     # end time of program + duration
     end_time = time.time()
     execution_time = int(end_time - start_time)
     print('\n', 'exectution time = ', execution_time, 'sec')
-
 
 if __name__ == "__main__":
     main()
