@@ -3,6 +3,7 @@ import pandas as pd
 import base64
 from folium import IFrame
 import folium
+from folium.plugins import MarkerCluster
 import time
 # from IPython.display import display
 
@@ -31,6 +32,10 @@ def main():
     # creating folium map
     map_graph = folium.Map([52.145259, 21.051619], zoom_start=13)
 
+    marker_cluster = MarkerCluster().add_to(map_graph)
+
+    folium.LayerControl().add_to(map_graph)
+
     # encoded = base64.b64encode(open('mypict.jpg', 'rb').read())
 
     # Plot Markers
@@ -46,7 +51,8 @@ def main():
         folium.Marker(location=[lat, lng],
                       tooltip=html, popup=popup,
                       # popup='<img src={path}>'.format(path=photo_path),
-                      icon=folium.Icon(color='blue', icon='camera', prefix='fa')).add_to(map_graph)
+                      icon=folium.Icon(color='blue', icon='camera', prefix='fa')).add_to(marker_cluster)
+
     # saving map
     print('saving map')
     map_graph.save(project_dir + r'\data\final\mural_map.html')
