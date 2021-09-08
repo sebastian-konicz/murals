@@ -32,7 +32,13 @@ def main():
     # creating folium map
     map_graph = folium.Map([52.145259, 21.051619], zoom_start=13)
 
-    marker_cluster = MarkerCluster().add_to(map_graph)
+    marker_options =    {
+                        'disableClusteringAtZoom': 13, # poziom wyłączania grupowania
+                        }
+
+    marker_cluster = MarkerCluster(
+                                    options=marker_options
+                                    ).add_to(map_graph)
 
     folium.LayerControl().add_to(map_graph)
 
@@ -44,7 +50,8 @@ def main():
         photo_path = project_dir + r'\data\murale_img\{photo_path}.jpg'.format(photo_path=photo)
         # marker setting
         encoded = base64.b64encode(open(photo_path, 'rb').read())
-        html = '<img style="width:100%; height:100%;" src="data:image/png;base64,{}">'.format
+        # html = '<img style="width:100%; height:100%;" src="data:image/png;base64,{}">'.format
+        html = '<a style="width:100%">Zobacz wiecej<a/>'.format
         iframe = IFrame(html(encoded.decode('UTF-8')), width=200, height=200)
         popup = folium.Popup(iframe, max_width=800)
 
